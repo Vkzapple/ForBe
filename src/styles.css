@@ -1,0 +1,484 @@
+:root {
+  --primary-color: #ff69b4;
+  --secondary-color: #ffb6c1;
+  --accent-color: #ffc0cb;
+  --text-color: #4a4a4a;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  background-color: #fff5f6;
+  overflow-y: auto;
+  text-decoration: none;
+}
+
+body.no-scroll {
+  overflow: hidden; /* Disable scroll */
+}
+
+.page {
+  min-height: 100vh;
+  display: none;
+  padding: 20px;
+}
+
+.page.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#riddlePage {
+  background: linear-gradient(135deg, #ffe5e5, #ffb6c1);
+  text-align: center;
+}
+
+.riddle-container {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+}
+
+#riddleAnswer {
+  width: 100%;
+  padding: 10px;
+  margin: 20px 0;
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+/* Countdown Page Styles */
+#countdownPage {
+  text-align: center;
+  background: linear-gradient(135deg, #ffe5e5, #ffb6c1);
+}
+
+.stopwatch-container {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.time-display {
+  font-size: 2.5em;
+  color: var(--primary-color);
+  margin: 20px 0;
+  font-family: "Digital", sans-serif;
+}
+
+/* Scrapbook Page Styles */
+#scrapbookPage {
+  background: #fff5f6;
+  perspective: 1000px;
+}
+
+.scrapbook-container {
+  width: 90%;
+  max-width: 800px;
+  height: 80vh;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.scrapbook-page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform-origin: left center;
+  transition: transform 1s;
+  backface-visibility: hidden;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.scrapbook-page::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 2px solid var(--secondary-color);
+  border-style: dashed;
+  pointer-events: none;
+}
+
+.stamp {
+  position: absolute;
+  width: 60px;
+  height: 80px;
+  background: url("/api/placeholder/60/80") no-repeat center/cover;
+  transform: rotate(-15deg);
+}
+
+.tape {
+  position: absolute;
+  width: 100px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.6);
+  transform: rotate(-45deg);
+}
+
+.polaroid {
+  position: absolute;
+  width: 200px;
+  height: 240px;
+  background: white;
+  padding: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: rotate(-5deg);
+}
+
+/* Music Page Styles */
+#musicPage {
+  background: linear-gradient(135deg, #ffe5e5, #ffb6c1);
+}
+
+.music-container {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 90%;
+}
+
+.song-card {
+  background: var(--secondary-color);
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s;
+}
+
+.song-card:hover {
+  transform: scale(1.02);
+}
+
+.lyrics-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  max-width: 80%;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.button {
+  padding: 10px 20px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+  margin: 10px;
+  transition: transform 0.3s ease;
+  text-decoration: none;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 1.5em;
+}
+
+@media (max-width: 768px) {
+  .polaroid {
+    width: 150px;
+    height: 180px;
+  }
+}
+:root {
+  --primary-color: #ff69b4;
+  --secondary-color: #ffb6c1;
+  --accent-color: #ffc0cb;
+  --text-color: #4a4a4a;
+}
+
+/* Existing base styles remain the same */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+/* Enhanced Riddle Page Button Styles */
+.love-submit-btn {
+  position: relative;
+  padding: 12px 30px;
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 1.1em;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+.love-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+}
+
+.love-submit-btn:active {
+  transform: translateY(1px);
+}
+
+.love-submit-btn .btn-text {
+  position: relative;
+  z-index: 2;
+}
+
+.love-submit-btn .heart-container {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.love-submit-btn.success {
+  background: linear-gradient(45deg, #4caf50, #45a049);
+}
+
+.love-submit-btn.error {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Enhanced Countdown Page Styles */
+.time-display {
+  font-size: 2.8em;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 2px;
+}
+
+/* Scrapbook Page Styles */
+#scrapbookPage {
+  background: #fff5f6;
+  perspective: 2000px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.scrapbook-container {
+  width: 90%;
+  max-width: 800px;
+  height: 80vh;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.scrapbook-page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform-origin: left center;
+  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+  backface-visibility: hidden;
+  overflow: auto;
+  cursor: grab;
+}
+
+.scrapbook-page:active {
+  cursor: grabbing;
+}
+
+.scrapbook-page::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 2px solid var(--secondary-color);
+  border-style: dashed;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.polaroid {
+  position: relative;
+  background: white;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: rotate(-3deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.polaroid:nth-child(even) {
+  transform: rotate(3deg);
+}
+
+.polaroid:hover {
+  transform: scale(1.05) rotate(0);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+}
+
+.polaroid img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border: 1px solid #eee;
+}
+
+.polaroid-caption {
+  text-align: center;
+  margin-top: 10px;
+  font-family: "Comic Sans MS", cursive;
+  color: var(--text-color);
+}
+
+.page-number {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-family: "Comic Sans MS", cursive;
+  color: var(--text-color);
+  font-size: 1.2em;
+}
+
+/* Navigation buttons */
+.nav-buttons {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  z-index: 10;
+}
+
+.nav-btn {
+  padding: 10px 20px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Photo popup styles */
+.photo-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.photo-popup.active {
+  opacity: 1;
+}
+
+.photo-popup img {
+  max-width: 90%;
+  max-height: 90vh;
+  border-radius: 5px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.close-popup {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-size: 2em;
+  cursor: pointer;
+}
+/* Animation Keyframes */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-5px);
+  }
+  40%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+@media (max-width: 768px) {
+  .scrapbook-page {
+    grid-template-columns: 1fr;
+  }
+
+  .time-display {
+    font-size: 2em;
+  }
+}

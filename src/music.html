@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Titi's Songs</title>
+    <style>
+      :root {
+        --primary-color: #ff69b4;
+        --secondary-color: #ffb6c1;
+        --accent-color: #ffc0cb;
+        --text-color: #4a4a4a;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+      body {
+        background: linear-gradient(135deg, #ffe5e5, #ffb6c1);
+
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--text-color);
+        padding: 20px;
+      }
+      .container {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        max-width: 600px;
+        width: 100%;
+      }
+      .title {
+        text-align: center;
+        color: var(--primary-color);
+        margin-bottom: 30px;
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+      }
+      .song-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .song-card {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+        border: 2px solid var(--accent-color);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+      .song-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: var(--primary-color);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+      }
+      .song-card:hover::before {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+      .song-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      .song-title {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+      .song-artist {
+        color: var(--text-color);
+        opacity: 0.7;
+      }
+      .birthday-link {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        background: white;
+        padding: 15px;
+        border-radius: 30px;
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: background 0.3s ease;
+      }
+      .birthday-link:hover {
+        background: var(--accent-color);
+      }
+      @media (min-width: 768px) {
+        .song-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 480px) {
+        .title {
+          font-size: 2rem;
+        }
+        .song-card {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">💕 Our Song💕</h1>
+      <div class="song-grid">
+        <div class="song-card" onclick="showLyrics('bestPart')">
+          <h2 class="song-title">Best Part</h2>
+          <p class="song-artist">Daniel Caesar ft. H.E.R</p>
+        </div>
+        <div class="song-card" onclick="showLyrics('kissMe')">
+          <h2 class="song-title">kiss me</h2>
+          <p class="song-artist">sixpence none the richer</p>
+        </div>
+        <div class="song-card" onclick="showLyrics('toronto')">
+          <h2 class="song-title">toronto 2014</h2>
+          <p class="song-artist">Daniel Caesar</p>
+        </div>
+      </div>
+
+      <a href="love-birthday.html" class="birthday-link"
+        >💌 Lihat Surat Ulang Tahun</a
+      >
+
+      <!-- Popup dan script sebelumnya tetap sama -->
+      <div id="bestPartPopup" class="popup">
+        <!-- Konten popup tetap sama -->
+      </div>
+    </div>
+
+    <script>
+      // Script untuk menampilkan lirik tetap sama seperti sebelumnya
+      function showLyrics(song) {
+        // Pause all other songs first
+        ["bestPart", "kissMe", "toronto"].forEach((s) => {
+          if (s !== song) {
+            document.getElementById(s + "Audio").pause();
+          }
+        });
+
+        // Show popup
+        document.getElementById(song + "Popup").style.display = "flex";
+
+        // Play corresponding audio
+        document.getElementById(song + "Audio").play();
+      }
+
+      function closeLyrics(song) {
+        // Hide popup
+        document.getElementById(song + "Popup").style.display = "none";
+
+        // Stop audio
+        document.getElementById(song + "Audio").pause();
+        document.getElementById(song + "Audio").currentTime = 0;
+      }
+    </script>
+  </body>
+</html>
